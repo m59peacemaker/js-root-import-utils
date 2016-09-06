@@ -9,7 +9,7 @@ const getLongRelativePathToModule = require('../lib/get-long-relative-path-to-mo
 const utils = require('../')
 
 test('hasPrefix', t => {
-  t.plan(10)
+  t.plan(12)
   const has = path => hasPrefix('~', path)
 
   t.true(has('~'))
@@ -23,11 +23,13 @@ test('hasPrefix', t => {
   t.false(has('./a'))
   t.false(has('a/b.js'))
 
+  t.true(hasPrefix('^', '^/a'))
+  t.false(hasPrefix('^', '/a'))
   t.true(hasPrefix('fr!end', 'fr!end/guy'))
 })
 
 test('stripPrefix', t => {
-  t.plan(8)
+  t.plan(9)
   const strip = path => stripPrefix('~', path)
   t.equal(strip('~'), '')
   t.equal(strip('~/'), '')
@@ -35,6 +37,7 @@ test('stripPrefix', t => {
   t.equal(strip('~/a/b.js'), 'a/b.js')
   t.equal(strip('a/b'), 'a/b')
   t.equal(strip('/a'), '/a')
+  t.equal(stripPrefix('^', '^/a'), 'a')
   t.equal(stripPrefix('fr!end', 'fr!end/'), '')
   t.equal(stripPrefix('fr!end', 'fr!end/guy'), 'guy')
 })
