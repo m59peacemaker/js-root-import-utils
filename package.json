@@ -1,6 +1,6 @@
 {
   "name": "root-import-utils",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "Functions for transforming import/require paths that have a prefix referring to the project root.",
   "main": "index.js",
   "scripts": {
