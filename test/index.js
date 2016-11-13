@@ -2,14 +2,11 @@ const test = require('tape')
 const hasPrefix = require('../lib/has-prefix')
 const stripPrefix = require('../lib/strip-prefix')
 const ensureIsRelativeModulePath = require('../lib/ensure-is-relative-module-path')
-//const getAbsoluteSourceDirname = require('../lib/get-absolute-source-dirname')
 const getRelativePathToModule = require('../lib/get-relative-path-to-module')
-//const getRelativePathToProjectRoot = require('../lib/get-relative-path-to-project-root')
 const getLongRelativePathToModule = require('../lib/get-long-relative-path-to-module')
 const utils = require('../')
 
 test('hasPrefix', t => {
-  t.plan(12)
   const has = path => hasPrefix('~', path)
 
   t.true(has('~'))
@@ -22,10 +19,15 @@ test('hasPrefix', t => {
   t.false(has('./'))
   t.false(has('./a'))
   t.false(has('a/b.js'))
+  t.false(has('~a'))
 
   t.true(hasPrefix('^', '^/a'))
   t.false(hasPrefix('^', '/a'))
+  t.false(hasPrefix('^', '^a/b'))
   t.true(hasPrefix('fr!end', 'fr!end/guy'))
+  t.false(hasPrefix('fr!end', 'fr!end.guy'))
+
+  t.end()
 })
 
 test('stripPrefix', t => {
