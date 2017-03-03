@@ -58,7 +58,7 @@ test('ensureIsRelativeModulePath', t => {
 })
 
 test('getRelativePathToModule', t => {
-  t.plan(9)
+  t.plan(10)
   const g = getRelativePathToModule
   t.equal(g('a.js',     'b'     ), './b')
   t.equal(g('a/b/c.js', 'aa'    ), '../../aa')
@@ -69,10 +69,11 @@ test('getRelativePathToModule', t => {
   t.equal(g('a/b/c.js', ''      ), '../../')
   t.equal(g('a/b/c.js', './'    ), '../../')
   t.equal(g('a/b/c.js', '../'   ), '../../../')
+  t.equal(g('a/b/c.js', 'd/e/f/'), '../../d/e/f/')
 })
 
 test('getLongRelativeModulePath', t => {
-  t.plan(9)
+  t.plan(10)
   const g = getLongRelativePathToModule
   t.equal(g('a.js', 'b'), './b')
   t.equal(g('a/b/c.js', 'aa'), '../../aa')
@@ -83,6 +84,7 @@ test('getLongRelativeModulePath', t => {
   t.equal(g('a/b/c.js', ''), '../../')
   t.equal(g('a/b/c.js', './'), '../../')
   t.equal(g('a/b/c.js', '../'), '../../../')
+  t.equal(g('a/b/c.js', 'd/e/f/'), '../../d/e/f/')
 })
 
 test('utils (main module)', t => {

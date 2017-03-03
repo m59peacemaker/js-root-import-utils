@@ -28,6 +28,7 @@
   },
   "license": "CC0-1.0",
   "dependencies": {
+    "fj-pipe": "^1.1.0",
     "path": "^0.12.7",
     "regexp.escape": "^1.0.2"
   },
